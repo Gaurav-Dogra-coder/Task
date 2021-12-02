@@ -53,18 +53,29 @@ public class StudentController {
 		}
 	}
 	@PutMapping("/update")
-	public Student update(@RequestBody Student modifiedObject) {
-		return studentRepository.save(modifiedObject);
+	public String update(@RequestBody Student modifiedObject) {
+		try {
+		 studentRepository.save(modifiedObject);
+		 return "done";
+		}
+		catch(Exception e){
+			return "error";
+		}
 	}
 
 	@DeleteMapping("/delete/{id}")
 	public String delete(@PathVariable Long id) {
+		try {
 		Optional<Student> studentobj = studentRepository.findById(id);
 		if(studentobj.isPresent()) {
 			studentRepository.delete(studentobj.get());
 			return "Employee deleted with id "+id;
 		}else {
 			throw new RuntimeException("Employee not found for id "+id);
+		}
+		}
+		catch(Exception e) {
+			return "error";
 		}
 	}
 }
