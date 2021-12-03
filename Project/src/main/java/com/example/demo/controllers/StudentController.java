@@ -33,11 +33,24 @@ public class StudentController {
 	}
 	@GetMapping("/read/{id}")
 	public Student read(@PathVariable Long id) {
+		try {
 		Optional<Student> Obj = studentRepository.findById(id);
 		if(Obj.isPresent()) {
 			return Obj.get();
 		}else {
 			throw new RuntimeException("Employee not found with id "+id);
+		}}
+		catch(Exception e) {
+			Student l=new Student();
+			l.setfName("NOT FOUND");
+			l.setlName("NOT FOUND");
+			l.setBranch("NOT FOUND");
+			l.setCollege("NOT FOUND");
+			l.setDOB("NOT FOUND");
+			l.setAge(000000);
+			l.setId(0);
+			System.out.println(e);
+			return l;
 		}
 	}
 	

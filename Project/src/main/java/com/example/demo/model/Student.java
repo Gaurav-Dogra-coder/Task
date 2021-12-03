@@ -6,7 +6,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "student")
 public class Student {
 @Id
-private long ID;//contact number
+private long ID;
+private long contact;//contact number
 private String fname;//first name
 private String lname;//last name
 private String dob;
@@ -17,9 +18,10 @@ public Student() {
 	super();
 	
 }
-public Student(long contact, String fname, String lname, String dob, double age, String college, String branch) {
+public Student(long Id, long contact, String fname, String lname, String dob, double age, String college, String branch) {
 	super();
-	this.ID = contact;
+	this.ID = Id;
+	this.contact=contact;
 	this.fname = fname;
 	this.lname = lname;
 	this.dob = dob;
@@ -30,8 +32,14 @@ public Student(long contact, String fname, String lname, String dob, double age,
 public long getId() {
 	return ID;
 }
-public void setId(long contact) {
-	this.ID = contact;
+public void setId(long Id) {
+	this.ID = Id;
+}
+public long getContact() {
+	return contact;
+}
+public void setContact(long contact) {
+	this.contact = contact;
 }
 public String getfName() {
 	return fname;
